@@ -2,7 +2,7 @@
 
 FireSim Version: [`v1.16.0`](https://github.com/firesim/firesim/releases/tag/1.16.0)
 
-This repository contains changes from the original [firemarhsal-keystone](https://github.com/keystone-enclave/firemarshal-keystone) repository. This uses the `dev` banch of the [Keystone](https://github.com/keystone-enclave/keystone) repository.
+This repository contains changes from the original [firemarhsal-keystone](https://github.com/keystone-enclave/firemarshal-keystone) repository. This uses the `dev` banch of the [Keystone](https://github.com/keystone-enclave/keystone/tree/dev) repository.
 
 This build was tested using [**B**erkeley e**X**tensible **E**nvironment (BXE)](https://socks.lbl.gov/cag/bxe/-/wikis/home). This can be run both on the virtual machines as well as the [BXE Docker image](https://socks.lbl.gov/cag/bxe/-/wikis/Docker-Image).
 
