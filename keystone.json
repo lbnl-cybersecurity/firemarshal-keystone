@@ -1,25 +1,25 @@
 {
-  "workdir" : ".",
-  "name" : "keystone",
-  "base" : "br-base.json",
-  "linux" : {
-    "source" : "keystone/linux",
-    "config" : "linux-config",
-    "modules" : {
-      "keystone" : "keystone/linux-keystone-driver"
+  "workdir": ".",
+  "name": "keystone",
+  "base": "br-base.json",
+  "linux": {
+    "config": "linux-config",
+    "modules": {
+      "keystone": "keystone/linux-keystone-driver"
     }
   },
-  "firmware" : {
-    "use-opensbi" : true,
-    "opensbi-src" : "keystone/sm",
-    "opensbi-build-args" : "O=../build PLATFORM_DIR=../plat FW_PAYLOAD=y -C opensbi"
+  "firmware": {
+    "use-opensbi": true,
+    "opensbi-src": "keystone/sm",
+    "opensbi-build-args": "O=../build PLATFORM_DIR=../plat FW_PAYLOAD=y -C opensbi"
   },
-  "host-init" : "host-init.sh",
-  "qemu": "keystone/qemu/riscv64-softmmu/qemu-system-riscv64",
-        "qemu-args": "-bios /home/centos/firemarshal-keystone/keystone/build/bootrom.build/bootrom.bin",
-  "cpus" : 4,
+  "host-init": "host-init.sh",
+  "cpus": 4,
   "mem": "4GiB",
-  "files" : [
-    ["keystone/build/examples/tests/tests.ke", "/root/tests.ke"]
+  "files": [
+    [
+      "keystone/build/examples/tests/tests.ke",
+      "/root/tests.ke"
+    ]
   ]
 }

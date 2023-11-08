@@ -18,12 +18,12 @@ sed -e 's#\-bios .*bootrom.bin#\-bios '$PWD'/keystone/build/bootrom.build/bootro
 cd keystone
 git checkout dev
 ./fast-setup.sh
-source ./source.sh
+# source ./source.sh
 mkdir -p build
 cd build
 cmake .. -Dfiresim=y
 make patch
 make bootrom
-make qemu
-make examples
+#make qemu
+#make examples
 
