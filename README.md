@@ -10,6 +10,7 @@ This build was tested using [**B**erkeley e**X**tensible **E**nvironment (BXE)](
   - [Running BXE Docker Keystone Image](#running-bxe-docker-keystone-image)
   - [Prerequisites for Building Keystone](#prerequisites-for-building-keystone)
   - [Building Keystone for FireMarshal on BXE VMs](#building-keystone-for-firemarshal-on-bxe-vms)
+  - [Running Keystone on BXE FireSim](#running-keystone-on-bxe-firesim)
   - [Building Keystone for FireMarshal on BXE Docker](#building-keystone-for-firemarshal-on-bxe-docker)
 
 ## Running BXE Docker Keystone Image
@@ -116,6 +117,97 @@ cd ../../../..
 ```bash
 ./marshal -v install bxe-workloads/firemarshal-keystone/keystone.json
 ```
+
+## Running Keystone on BXE FireSim
+
+1. If you've completed the above steps, you'll see the corresponding Keystone JSON and directory in `firesim/deploy/workloads`
+
+```bash
+...
+keystone/
+keystone.json
+...
+```
+
+2. Modify the workload section of `firesim/deploy/config_runtime.yaml` to run this newly installed Keystone workload
+
+```yaml
+workload:
+    workload_name: keystone.json
+    terminate_on_completion: no
+    suffix_tag: null
+```
+
+3. Run the FireSim Simulation
+
+```bash
+firesim launchrunfarm
+firesim infrasetup    # This step will take some time to run
+firesim runworkload
+```
+
+After the `firesim runworkload`, you'll see the following output on your console:
+
+```bash
+This workload's output is located in:
+/home/bxeuser/firesim/deploy/results-workload/2023-11-09--04-13-01-keystone/
+This run's log is located in:
+/home/bxeuser/firesim/deploy/logs/2023-11-09--04-13-01-runworkload-VECZEPC17GHQHCB9.log
+This status will update every 10s.
+--------------------------------------------------------------------------------
+Instances
+--------------------------------------------------------------------------------
+Hostname/IP: localhost | Terminated: False
+--------------------------------------------------------------------------------
+Simulated Switches
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Simulated Nodes/Jobs
+--------------------------------------------------------------------------------
+Hostname/IP: localhost | Job: keystone0 | Sim running: True
+--------------------------------------------------------------------------------
+Summary
+--------------------------------------------------------------------------------
+1/1 instances are still running.
+1/1 simulations are still running.
+--------------------------------------------------------------------------------
+```
+
+4. In a different window, run:
+
+```bash
+screen -r fsim0
+```
+
+You will see the console slowly boot:
+
+```
+[   18.678898] keystone_enclave: keystone enclave v1.0.0
+Mounting /dev/iceblk as root device
+[   18.877760] EXT4-fs (iceblk): mounted filesystem cef912a2-15bf-4aa3-bd13-fbcbd1407107 without journal. Quota mode: disabled.
+Loaded platform drivers, booting from disk:
+[   19.300984] EXT4-fs (iceblk): re-mounted cef912a2-15bf-4aa3-bd13-fbcbd1407107. Quota mode: disabled.
+running /etc/init.d/S01syslogd
+Starting syslogd: OK
+running /etc/init.d/S02klogd
+Starting klogd: OK
+running /etc/init.d/S02sysctl
+Running sysctl: OK
+running /etc/init.d/S10mdev
+Starting mdev: OK
+running /etc/init.d/S40network
+Starting network: OK
+running /etc/init.d/S99run
+launching firemarshal workload run/command
+firemarshal workload run/command done
+
+Welcome to Buildroot
+buildroot login:
+```
+
+4. Unfortunately, the current limitation where the simulation doesn't respond to keyboard input. To end the simulation, return to the window where you ran `firesim runworkload` and press <kbd>CTRL</kbd> + <kbd>C</kbd> to terminate the simulation.
+
+The workaround to this issue is to build a workload that runs the program and ends the simulation. To do so, the the BXE Documentation on [defining a custom workload](https://socks.lbl.gov/cag/bxe/-/wikis/Building-Software) will guide you through that process.
 
 ## Building Keystone for FireMarshal on BXE Docker
 
