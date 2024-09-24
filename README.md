@@ -1,46 +1,23 @@
 # FireMarshal Keystone on FireSim
 
-FireSim Version: [`v1.16.0`](https://github.com/firesim/firesim/releases/tag/1.16.0)
+> [!NOTE]
+> BXE Version: `v2.1.0`
+> 
+> FireSim Version: [`v1.20.1`](https://github.com/firesim/firesim/releases/tag/1.20.1)
 
 This repository contains changes from the original [firemarhsal-keystone](https://github.com/keystone-enclave/firemarshal-keystone) repository. This uses the `dev` banch of the [Keystone](https://github.com/keystone-enclave/keystone/tree/dev) repository.
 
 This build was tested using [**B**erkeley e**X**tensible **E**nvironment (BXE)](https://socks.lbl.gov/cag/bxe/-/wikis/home). This can be run both on the virtual machines as well as the [BXE Docker image](https://socks.lbl.gov/cag/bxe/-/wikis/Docker-Image).
 
 - [FireMarshal Keystone on FireSim](#firemarshal-keystone-on-firesim)
-  - [Running BXE Docker Keystone Image](#running-bxe-docker-keystone-image)
   - [Prerequisites for Building Keystone](#prerequisites-for-building-keystone)
   - [Building Keystone for FireMarshal on BXE VMs](#building-keystone-for-firemarshal-on-bxe-vms)
   - [Running Keystone on BXE FireSim](#running-keystone-on-bxe-firesim)
-  - [Building Keystone for FireMarshal on BXE Docker](#building-keystone-for-firemarshal-on-bxe-docker)
-
-## Running BXE Docker Keystone Image
-
-1. Pull the Keystone BXE Docker image
-
-```bash
-docker pull socks.lbl.gov:4567/cag/bxe:keystone
-```
-
-2. Run the Docker image
-
-```bash
-docker run --privileged -it socks.lbl.gov:4567/cag/bxe:keystone
-```
-
-3. Source FireSim
-
-```bash
-source source-env.sh
-```
-
-4. Launch Keystone with FireMarshal
-
-```bash
-cd ~/firesim/sw/firesim-software
-./marshal -v launch bxe-workloads/firemarshal-keystone/keystone.json
-```
+  - [Running BXE Docker Keystone Image - OUTDATED](#running-bxe-docker-keystone-image---outdated)
+  - [Building Keystone for FireMarshal on BXE Docker - OUTDATED](#building-keystone-for-firemarshal-on-bxe-docker---outdated)
 
 ## Prerequisites for Building Keystone
+
 - Install the prerequisites for Keystone to build
 
 ```bash
@@ -49,20 +26,21 @@ sudo apt install cmake makeself ninja-build pkg-config pkg-config-riscv64-linux-
 
 ## Building Keystone for FireMarshal on BXE VMs
 
-**NOTE:** Make sure you've installed [prerequisites](#prerequisites) in your BXE VM.
+> [!IMPORTANT]
+> Make sure you've installed [prerequisites](#prerequisites) in your BXE VM.
 
 1. Source FireSim
 
 ```bash
 cd firesim
-source sourceme-f1-manager.sh --skip-ssh-setup
+source sourceme-manager.sh --skip-ssh-setup
 ```
 
 2. Clone this repository into the FireMarshal directory.
 
 ```bash
-cd ~/firesim/sw/firesim-software
-mkdir bxe-workloads
+cd $FIREMARSHAL_ROOT
+mkdir -p bxe-workloads
 cd bxe-workloads
 git clone https://github.com/lbnl-cybersecurity/firemarshal-keystone.git
 cd ..
@@ -209,9 +187,39 @@ buildroot login:
 
 The workaround to this issue is to build a workload that runs the program and ends the simulation. To do so, the the BXE Documentation on [defining a custom workload](https://socks.lbl.gov/cag/bxe/-/wikis/Building-Software) will guide you through that process.
 
-## Building Keystone for FireMarshal on BXE Docker
+## Running BXE Docker Keystone Image - OUTDATED
 
-**NOTE:** Make sure you've installed [prerequisites](#prerequisites) in the Docker container.
+1. Pull the Keystone BXE Docker image
+
+```bash
+docker pull socks.lbl.gov:4567/cag/bxe:keystone
+```
+
+2. Run the Docker image
+
+```bash
+docker run --privileged -it socks.lbl.gov:4567/cag/bxe:keystone
+```
+
+3. Source FireSim
+
+```bash
+source source-env.sh
+```
+
+4. Launch Keystone with FireMarshal
+
+```bash
+cd ~/firesim/sw/firesim-software
+./marshal -v launch bxe-workloads/firemarshal-keystone/keystone.json
+```
+
+
+
+## Building Keystone for FireMarshal on BXE Docker - OUTDATED
+
+> [!IMPORTANT]
+> Make sure you've installed [prerequisites](#prerequisites) in the Docker container.
 
 1. Source FireSim
 
