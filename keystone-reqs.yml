@@ -96,7 +96,7 @@ dependencies:
   - git
   - ninja # needed in case we need to built circt from scratch
 
-  - cmake
+  # - cmake
   - makeself
   - pkgconfig
   # - pkg-config-riscv64-linux-gnu
