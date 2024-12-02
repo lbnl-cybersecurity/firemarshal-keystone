@@ -1,0 +1,14 @@
+name: keystone
+channels:
+  - conda-forge
+
+platforms:
+  - linux-64
+
+dependencies:
+  - cmake
+  - makeself
+  - ninja
+  - pkgconfig
+  # - pkg-config-riscv64-linux-gnu
+  - libglib
