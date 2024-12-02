@@ -6,4 +6,4 @@ if [[ -z "${FIRESIM_SOURCED}" ]]; then
     exit 1
 fi
 
-conda activate --stack keystone
+conda activate keystone
