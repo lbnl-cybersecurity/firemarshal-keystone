@@ -14,6 +14,7 @@
     "opensbi-build-args": "O=../build PLATFORM_DIR=../plat FW_PAYLOAD=y -C opensbi"
   },
   "host-init": "host-init.sh",
+  "qemu-args": "-bios $KEYSTONE_ROOT/keystone/build/bootrom.build/bootrom.bin",
   "cpus": 4,
   "mem": "4GiB",
   "files": [

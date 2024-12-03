@@ -58,6 +58,7 @@ dependencies:
   - wget
   - findutils
   - lzop
+  - pyyaml
 
   - make
   - bash-completion

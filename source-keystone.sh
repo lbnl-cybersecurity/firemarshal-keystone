@@ -7,3 +7,5 @@ if [[ -z "${FIRESIM_SOURCED}" ]]; then
 fi
 
 conda activate keystone
+
+export KEYSTONE_ROOT=${FIREMARSHAL_ROOT}/bxe-workloads/firemarshal-keystone/keystone

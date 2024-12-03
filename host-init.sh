@@ -17,13 +17,21 @@ sed -e 's#\-bios .*bootrom.bin#\-bios '$PWD'/keystone/build/bootrom.build/bootro
 
 cd keystone
 git checkout dev
+
+if ! grep -Fq "cstdint" sdk/include/host/keystone_user.h; then
+	sed -i '10i\#include <cstdint>' sdk/include/host/keystone_user.h
+fi
+sed -i '92c\    CONFIGURE_COMMAND sed -i "10s/-g/-g -march=rv64gc_zifencei/" Makefile' sdk/macros.cmake
+
 ./fast-setup.sh
-# source ./source.sh
+if [[ -z "${KEYSTONE_SDK_DIR}" ]]; then
+	source ./source.sh
+fi
 mkdir -p build
 cd build
 cmake .. -Dfiresim=y
 make patch
 make bootrom
 #make qemu
-#make examples
+make examples
 
